@@ -92,7 +92,7 @@ const DataGridItem: React.FC<DataGridItemProps> = ({ item }) => {
             <p>Original Launch: {formatDate(item.original_launch)}</p>
             <p>Type: {item.type}</p>
             <h3 className="mt-4 text-md font-semibold">
-              Missions: {item && item.missions && item.missions.length - 1}
+              Missions: {item && item.missions && item.missions.length}
             </h3>
             <ul className="list-disc ml-6">
               {item &&
