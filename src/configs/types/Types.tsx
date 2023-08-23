@@ -33,7 +33,7 @@ export interface PaginationProps {
 }
 export interface ModalProps {
   children: React.ReactNode;
-  onClose:(event: React.ChangeEvent<HTMLSelectElement>) => void;
+  onClose:(event: React.MouseEvent<HTMLDivElement, MouseEvent>)  => void;
 }
 export interface DataGridItemProps {
   item: Capsule;

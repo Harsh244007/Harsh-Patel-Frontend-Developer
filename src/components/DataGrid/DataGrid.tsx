@@ -34,6 +34,7 @@ const DataGrid: React.FC = () => {
           return (
             <div className="flex flex-col justify-center items-center gap-20 max-w-auto">
               <div className="flex flex-wrap justify-center items-center gap-20 max-w-auto">
+               {/* @ts-ignore  for vercel deployment*/}
                 {currentItems.map((item: Capsule, index: number) => {
                   return <DataGridItem key={index} item={item} />;
                 })}

@@ -28,13 +28,12 @@ const spaceXSlice = createSlice({
     builder
       .addCase(fetchData.pending, (state) => {
         state.loading = true;
-        state.error = null;
       })
       .addCase(fetchData.fulfilled, (state, action) => {
         state.loading = false;
         state.data = action.payload;
       })
-      .addCase(fetchData.rejected, (state, action) => {
+      .addCase(fetchData.rejected, (state) => {
         state.loading = false;
         state.data = [];
       });
@@ -42,5 +41,5 @@ const spaceXSlice = createSlice({
 });
 
 export default spaceXSlice.reducer;
-export const selectSpaceXData = (state:RootState) => state.spaceX.data;
-export const selectSpaceXLoading = (state:RootState) => state.spaceX.loading;
+export const selectSpaceXData = (state: RootState) => state.spaceX.data;
+export const selectSpaceXLoading = (state: RootState) => state.spaceX.loading;
