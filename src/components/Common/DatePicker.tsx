@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 
 interface DatePickerProps {
   name: string;
@@ -15,16 +15,19 @@ const DatePicker: React.FC<DatePickerProps> = ({
 }) => {
   const [selectedValue, setSelectedValue] = useState(value);
 
+  const handleDateChange = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      const newSelectedValue = event.target.value;
+      setSelectedValue(newSelectedValue);
+      const utcDate = new Date(newSelectedValue).toISOString();
+      onChange(name, utcDate);
+    },
+    [name, onChange]
+  );
+
   useEffect(() => {
     if (updateValue) setSelectedValue(value);
-  }, [updateValue]);
-
-  const handleDateChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const newSelectedValue = event.target.value;
-    setSelectedValue(newSelectedValue);
-    const utcDate = new Date(newSelectedValue).toISOString();
-    onChange(name, utcDate);
-  };
+  }, [updateValue, value]);
 
   return (
     <input

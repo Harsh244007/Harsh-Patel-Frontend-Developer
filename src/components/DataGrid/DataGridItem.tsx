@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Capsule, DataGridItemProps, Mission } from "../../configs/types/Types";
+import { DataGridItemProps, Mission } from "../../configs/types/Types";
 import Modal from "../Common/Modal";
 
 interface OptionTypes {
@@ -7,12 +7,24 @@ interface OptionTypes {
   month: string;
   day: string;
 }
+
+const capitalizeFirstLetter = (str: string) => {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+};
+
+const getStatusClass = (status: string) => {
+  if (status === "unknown") return "text-red-600";
+  if (status === "active") return "text-green-600";
+  return "line-through text-gray-600";
+};
+
 const DataGridItem: React.FC<DataGridItemProps> = ({ item }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const toggleModal = () => {
     setIsModalOpen(!isModalOpen);
   };
+
   const formatDate = (dateString: string) => {
     const options: OptionTypes = {
       year: "numeric",
@@ -21,28 +33,16 @@ const DataGridItem: React.FC<DataGridItemProps> = ({ item }) => {
     };
     return new Date(dateString).toLocaleDateString(undefined, options);
   };
+
   return (
     <div
       key={item.capsule_serial}
       className="bg-gray-100 p-6 rounded-md shadow-md cursor-pointer"
     >
       <h2 className="text-lg font-semibold">
-        Capsule{" : "}
-        {item &&
-          item.capsule_id &&
-          item.capsule_id.charAt(0)?.toUpperCase() + item &&
-          item.capsule_id &&
-          item.capsule_id.slice(1)}{" "}
+        Capsule: {capitalizeFirstLetter(item && item.capsule_id)}
       </h2>
-      <p
-        className={`text-gray-600 ${
-          item.status === "unknown"
-            ? " text-red-600"
-            : item.status === "active"
-            ? "text-green-600"
-            : "line-through text-gray-600"
-        }`}
-      >
+      <p className={`text-gray-600 ${getStatusClass(item && item.status)}`}>
         Status: {item.status}
       </p>
       <p className="text-gray-600">
@@ -55,7 +55,6 @@ const DataGridItem: React.FC<DataGridItemProps> = ({ item }) => {
       <button onClick={toggleModal} className="text-blue-500">
         View Details
       </button>
-
       {isModalOpen && (
         <Modal onClose={toggleModal}>
           <div className="modal-content bg-white p-4 rounded-md">
@@ -109,4 +108,4 @@ const DataGridItem: React.FC<DataGridItemProps> = ({ item }) => {
   );
 };
 
-export default DataGridItem;
+export default React.memo(DataGridItem);

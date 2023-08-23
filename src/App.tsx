@@ -1,4 +1,3 @@
-// src/App.tsx
 import React,{ useEffect } from "react";
 import { Banner, SearchForm, DataGrid } from "./components";
 import Loading from "./components/Common/Loading";

@@ -1,5 +1,4 @@
-// src/components/Banner.tsx
-import React from 'react';
+import React from "react";
 
 const Banner: React.FC = () => {
   return (

@@ -1,4 +1,3 @@
-// src/components/SearchForm.tsx
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -21,7 +20,6 @@ const SearchForm: React.FC = () => {
   });
 
   useEffect(() => {
-    // @ts-ignore
     dispatch(fetchData(filters));
   }, [filters, dispatch]);
 

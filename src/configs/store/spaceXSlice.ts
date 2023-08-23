@@ -1,17 +1,15 @@
-// src/configs/store/spaceXSlice.ts
-import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { RootState } from "./store"; // Import your RootState type
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { fetchSpaceXData } from "../../services/spaceXService";
+import { RootState } from "./store";
+
 interface SpaceXState {
-  data: unknown[]; // Define your data structure
+  data: unknown[];
   loading: boolean;
-  error: string | null;
 }
 
 const initialState: SpaceXState = {
   data: [],
   loading: false,
-  error: null,
 };
 
 export const fetchData = createAsyncThunk(
@@ -25,20 +23,7 @@ export const fetchData = createAsyncThunk(
 const spaceXSlice = createSlice({
   name: "spaceX",
   initialState,
-  reducers: {
-    fetchDataStart(state) {
-      state.loading = true;
-      state.error = null;
-    },
-    fetchDataSuccess(state, action: PayloadAction<unknown[]>) {
-      state.loading = false;
-      state.data = action.payload;
-    },
-    fetchDataFailure(state, action: PayloadAction<string>) {
-      state.loading = false;
-      state.error = action.payload;
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(fetchData.pending, (state) => {
@@ -47,20 +32,15 @@ const spaceXSlice = createSlice({
       })
       .addCase(fetchData.fulfilled, (state, action) => {
         state.loading = false;
-        state.data = action.payload; 
+        state.data = action.payload;
       })
       .addCase(fetchData.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.error.message || "An error occurred";
+        state.data = [];
       });
   },
 });
 
-export const { fetchDataStart, fetchDataSuccess, fetchDataFailure } =
-  spaceXSlice.actions;
-
 export default spaceXSlice.reducer;
-
-export const selectSpaceXData = (state: RootState) => state.spaceX.data;
-export const selectSpaceXLoading = (state: RootState) => state.spaceX.loading;
-export const selectSpaceXError = (state: RootState) => state.spaceX.error;
+export const selectSpaceXData = (state:RootState) => state.spaceX.data;
+export const selectSpaceXLoading = (state:RootState) => state.spaceX.loading;

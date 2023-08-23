@@ -1,4 +1,3 @@
-// src/components/index.ts
 import React from 'react';
 
 const Banner = React.lazy(() => import('./Banner'));

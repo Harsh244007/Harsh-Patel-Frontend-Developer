@@ -1,4 +1,3 @@
-// src/configs/store/store.ts
 import { configureStore } from '@reduxjs/toolkit';
 import spaceXReducer from './spaceXSlice';
 
