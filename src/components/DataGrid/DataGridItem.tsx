@@ -37,7 +37,7 @@ const DataGridItem: React.FC<DataGridItemProps> = ({ item }) => {
 
   return (
     <div
-      key={item.capsule_serial}
+      key={item.capsule_serial} onClick={toggleModal}
       className="bg-gray-100 p-6 rounded-md shadow-md cursor-pointer"
     >
       <h2 className="text-lg font-semibold">

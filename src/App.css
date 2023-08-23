@@ -67,6 +67,7 @@ body {
 .modal-container {
   background-color: white;
   width: 80%;
+  max-width: 1200px;
   height: 60%;
   position: relative;
   margin: auto;
