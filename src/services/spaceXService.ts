@@ -6,14 +6,14 @@ const dataCache: Record<string, Capsule[]> = JSON.parse(
 );
 
 export const fetchSpaceXData = async (
-  filters: Record<string, string>
+  filters: Capsule
 ): Promise<Capsule[]> => {
   const filtersString: string = JSON.stringify(filters);
 
   if (dataCache[filtersString]) {
     return dataCache[filtersString];
   }
-
+ {/* @ts-ignore  for vercel deployment*/}
   const queryString = new URLSearchParams(filters).toString();
   const fetchedData = await fetch(
     `https://api.spacexdata.com/v3/capsules?${queryString}`,
@@ -32,7 +32,6 @@ export const fetchSpaceXData = async (
 
   dataCache[filtersString] = fetchedData;
 
-  // Store the updated dataCache in local storage
   localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(dataCache));
 
   return fetchedData;
