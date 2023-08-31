@@ -31,13 +31,17 @@ const DataGridItem: React.FC<DataGridItemProps> = ({ item }) => {
       month: "long",
       day: "numeric",
     };
-    {/* @ts-ignore  for vercel deployment*/}
+    {
+      /* @ts-ignore  for vercel deployment*/
+    }
     return new Date(dateString).toLocaleDateString(undefined, options);
   };
 
   return (
     <div
-      key={item.capsule_serial} onClick={toggleModal}
+      tabIndex={0}
+      key={item.capsule_serial}
+      onClick={toggleModal}
       className="bg-gray-100 p-6 rounded-md shadow-md cursor-pointer"
     >
       <h2 className="text-lg font-semibold">
