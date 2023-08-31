@@ -31,9 +31,7 @@ const DataGridItem: React.FC<DataGridItemProps> = ({ item }) => {
       month: "long",
       day: "numeric",
     };
-    {
-      /* @ts-ignore  for vercel deployment*/
-    }
+    {      /* @ts-ignore  for vercel deployment*/}
     return new Date(dateString).toLocaleDateString(undefined, options);
   };
 
